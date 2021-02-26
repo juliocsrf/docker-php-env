@@ -1,0 +1,26 @@
+version: "3.2"
+services:
+    db:
+        container_name: mysql
+        image: mysql:5.7
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - 9906:3306
+        volumes:
+            - ./mysql-data:/var/lib/mysql
+    nginx:
+        container_name: nginx
+        image: nginx:1.17.8
+        ports:
+            - 80:80
+        volumes:
+            - ./config/nginx/site.conf:/etc/nginx/conf.d/site.conf
+            - ./www:/www
+        links:
+            - php-docker
+    php-docker:
+        container_name: php-docker
+        image: juliocsrmf/php-7-4-mongodb-driver
+        volumes:
+            - ./www:/www
