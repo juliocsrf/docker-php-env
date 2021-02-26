@@ -16,11 +16,11 @@ services:
             - 80:80
         volumes:
             - ./config/nginx/site.conf:/etc/nginx/conf.d/site.conf
-            - ./www:/www
+            - ./www:/usr/www
         links:
             - php-docker
     php-docker:
         container_name: php-docker
         image: juliocsrmf/php-7-4-mongodb-driver
         volumes:
-            - ./www:/www
+            - ./www:/usr/www
