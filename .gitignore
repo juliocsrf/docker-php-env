@@ -1,4 +1,4 @@
 /config/nginx/site.conf
 /mysql-data/
 /www/
-docker-cmopose.yml
+docker-compose.yml
