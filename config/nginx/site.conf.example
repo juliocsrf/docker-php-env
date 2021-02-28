@@ -18,10 +18,10 @@ server {
 	charset utf-8;
 
 	# LARAVEL PROJECT EXAMPLE:
-	# location /rideweb/public {
+	# location /project/public {
 	# 	root /usr/www;
 	# 	index index.html index.php;
-	# 	try_files $uri $uri/ /rideweb/public/index.php?$query_string;
+	# 	try_files $uri $uri/ /project/public/index.php?$query_string;
 	# }
 
 	location / {
@@ -31,7 +31,7 @@ server {
 	location ~ \.php$ {
 		include fastcgi_params;
 		try_files $fastcgi_script_name = 404;
-		fastcgi_pass php-docker:9000;
+		fastcgi_pass php:9000;
 		fastcgi_index index.php;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 	}

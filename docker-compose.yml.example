@@ -6,7 +6,7 @@ services:
         environment: 
             MYSQL_ROOT_PASSWORD: root
         ports:
-            - 9906:3306
+            - 3306:3306
         volumes:
             - ./mysql-data:/var/lib/mysql
     nginx:
@@ -18,9 +18,9 @@ services:
             - ./config/nginx/site.conf:/etc/nginx/conf.d/site.conf
             - ./www:/usr/www
         links:
-            - php-docker
-    php-docker:
-        container_name: php-docker
+            - php
+    php:
+        container_name: php
         image: juliocsrmf/php-7-4-mongodb-driver
         volumes:
             - ./www:/usr/www
