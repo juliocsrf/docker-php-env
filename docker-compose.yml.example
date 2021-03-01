@@ -3,6 +3,7 @@ services:
     db:
         container_name: mysql
         image: mysql:5.7
+        restart: always
         environment: 
             MYSQL_ROOT_PASSWORD: root
         ports:
@@ -12,6 +13,7 @@ services:
     nginx:
         container_name: nginx
         image: nginx:1.17.8
+        restart: always
         ports:
             - 80:80
         volumes:
@@ -21,6 +23,7 @@ services:
             - php-docker
     php-docker:
         container_name: php-docker
+        restart: always
         image: juliocsrmf/php-7-4-mongodb-driver
         volumes:
             - ./www:/usr/www
