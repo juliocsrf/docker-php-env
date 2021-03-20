@@ -3,3 +3,4 @@
 /www/
 docker-compose.yml
 /config/php/custom.ini
+/data

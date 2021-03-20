@@ -8,11 +8,16 @@ server {
 	listen [::]:80;
 
 	server_name app.localhost;
+	return 301 https://$server_name$request_uri;
+
 	root /usr/www/app;
 	index index.html index.htm index.php;
 	client_max_body_size 200m;
 	fastcgi_read_timeout 2500;
 	charset utf-8;
+	location /.well-known/acme-challenge/ { #CertBot Challange
+		root /var/www/certbot;
+	}
 	location / {
 		try_files $uri $uri/ /index.php?$query_string;
 	}
@@ -29,4 +34,19 @@ server {
 	location ~ /.well-known {
 		allow all;
 	}
+}
+
+server {
+    listen 443 ssl;
+    server_name app.localhost;
+
+	ssl_certificate /etc/letsencrypt/live/app.localhost/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/app.localhost/privkey.pem;
+
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+    
+    location / {
+        proxy_pass http://app.localhost;
+    }
 }

@@ -18,9 +18,19 @@ services:
         image: nginx:1.17.8
         ports:
             - 80:80
+            - 443:443
         volumes:
             - ./config/nginx/site.conf:/etc/nginx/conf.d/site.conf
             - ./www:/usr/www
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+        networks:
+            - nginx-network
+    certbot:
+        image: certbot/certbot
+        volumes:
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
         networks:
             - nginx-network
     php:
