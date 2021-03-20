@@ -4,3 +4,4 @@
 docker-compose.yml
 /config/php/custom.ini
 /data
+init-letsencrypt.sh

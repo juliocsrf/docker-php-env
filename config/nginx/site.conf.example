@@ -5,48 +5,45 @@ server {
 
 server {
 	listen 80;
-	listen [::]:80;
-
 	server_name app.localhost;
-	return 301 https://$server_name$request_uri;
-
-	root /usr/www/app;
-	index index.html index.htm index.php;
-	client_max_body_size 200m;
-	fastcgi_read_timeout 2500;
-	charset utf-8;
-	location /.well-known/acme-challenge/ { #CertBot Challange
-		root /var/www/certbot;
+	location /.well-known/acme-challenge/ {
+			root /var/www/certbot;
 	}
 	location / {
-		try_files $uri $uri/ /index.php?$query_string;
-	}
-	location ~ \.php$ {
-		include fastcgi_params;
-		try_files $fastcgi_script_name = 404;
-		fastcgi_pass php:9000;
-		fastcgi_index index.php;
-		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-	}
-	location ~ /\.ht {
-		deny all;
-	}
-	location ~ /.well-known {
-		allow all;
+			return 301 https://$host$request_uri;
 	}
 }
 
 server {
-    listen 443 ssl;
-    server_name app.localhost;
+	listen 443 ssl;
+	server_name app.localhost;
 
 	ssl_certificate /etc/letsencrypt/live/app.localhost/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/app.localhost/privkey.pem;
 
 	include /etc/letsencrypt/options-ssl-nginx.conf;
 	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-    
-    location / {
-        proxy_pass http://app.localhost;
-    }
+
+	root /usr/www/plataformadev;
+	index index.html index.htm index.php;
+	client_max_body_size 200m;
+	fastcgi_read_timeout 2500;
+	charset utf-8;
+
+	location / {
+			try_files $uri $uri/ /index.php?$query_string;
+	}
+	location ~ \.php$ {
+			include fastcgi_params;
+			try_files $fastcgi_script_name = 404;
+			fastcgi_pass php:9000;
+			fastcgi_index index.php;
+			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	}
+	location ~ /\.ht {
+			deny all;
+	}
+	location ~ /.well-known {
+			allow all;
+	}
 }
