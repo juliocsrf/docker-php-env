@@ -41,7 +41,7 @@ services:
         image: juliocsrmf/php-7-4-mongodb-driver
         volumes:
             - ./www:/usr/www
-            - ./config/php:/usr/local/etc/php/conf.d
+            - ./config/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
         networks:
             - nginx-network
 networks:
