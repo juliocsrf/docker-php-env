@@ -47,3 +47,4 @@ services:
 networks:
     nginx-network:
         driver: bridge
+        name: nginx-network
