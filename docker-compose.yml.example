@@ -19,17 +19,17 @@ services:
         ports:
             - 80:80
         volumes:
-            - ./config/nginx/site.conf:/etc/nginx/conf.d/site.conf
+            - ./config/nginx/:/etc/nginx/conf.d/
             - ./www:/usr/www
         networks:
             - nginx-network
-    php:
-        container_name: php
+    app:
+        container_name: app
         restart: unless-stopped
         image: juliocsrmf/php-7-4-mongodb-driver
         volumes:
-            - ./www:/usr/www
-            - ./config/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+            - ./www/app:/usr/www/app
+            - ./config/php/app/custom.ini:/usr/local/etc/php/conf.d/custom.ini
         networks:
             - nginx-network
 networks:
