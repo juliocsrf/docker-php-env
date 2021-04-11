@@ -24,7 +24,7 @@ server {
 	include /etc/letsencrypt/options-ssl-nginx.conf;
 	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
-	root /usr/www/plataformadev;
+	root /usr/www/app;
 	index index.html index.htm index.php;
 	client_max_body_size 200m;
 	fastcgi_read_timeout 2500;
@@ -36,9 +36,9 @@ server {
 	location ~ \.php$ {
 			include fastcgi_params;
 			try_files $fastcgi_script_name = 404;
-			fastcgi_pass php:9000;
+			fastcgi_pass app:9000;
 			fastcgi_index index.php;
-			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
 	}
 	location ~ /\.ht {
 			deny all;
