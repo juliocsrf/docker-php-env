@@ -11,6 +11,13 @@ services:
             - 3306:3306
         volumes:
             - ./mysql-data:/var/lib/mysql
+        deploy:
+            resources:
+                limits:
+                    memory: 64M
+                    cpus: 0.01
+                reservations:
+                    memory: 64M
         networks:
             - nginx-network
     nginx:
@@ -31,6 +38,13 @@ services:
         volumes:
             - ./www/app:/usr/www/app
             - ./config/php/app/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
+                    cpus: 0.01
+                reservations:
+                    memory: 64M
         networks:
             - nginx-network
 networks:
