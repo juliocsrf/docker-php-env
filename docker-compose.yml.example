@@ -38,6 +38,7 @@ services:
         volumes:
             - ./www/app:/usr/www/app
             - ./config/php/app/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+            - ./config/crontabs/app:/etc/crontabs/root # Use this for enable your custom cronwork
         deploy:
             resources:
                 limits:
