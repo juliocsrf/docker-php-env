@@ -3,3 +3,4 @@
 /www/
 docker-compose.yml
 /config/
+/portainer_data

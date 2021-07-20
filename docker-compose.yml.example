@@ -27,10 +27,19 @@ services:
         deploy:
             resources:
                 limits:
-                    memory: 64M
-                    cpus: 0.01
+                    memory: 512M
+                    cpus: 0.5
                 reservations:
                     memory: 64M
+    portainer:
+        container_name: portainer
+        restart: unless-stopped
+        image: portainer/portainer-ce
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./portainer_data:/data
+        networks:
+            - nginx-network
     app:
         container_name: app
         restart: unless-stopped
