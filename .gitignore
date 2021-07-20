@@ -5,3 +5,4 @@ docker-compose.yml
 /config/
 /data
 init-letsencrypt.sh
+/portainer_data
