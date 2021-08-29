@@ -1,0 +1,25 @@
+server {
+        listen 80 default_server;
+
+        if ($host = "127.0.0.1") {
+                return 301 $scheme://yourdomain.com$request_uri;
+        }
+
+        return 444;
+}
+
+server {
+        listen 443 default_server;
+
+        ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/yourdomain.com/privkey.pem;
+
+        if ($host = "127.0.0.1") {
+                return 301 $scheme://yourdomain.com$request_uri;
+        }
+
+        return 444;
+}
+
+fastcgi_cache_path /etc/nginx-cache levels=1:2 keys_zone=phpcache:100m inactive=60m;
+fastcgi_cache_key "$scheme$request_method$host$request_uri";
