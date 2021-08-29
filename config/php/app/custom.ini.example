@@ -1,3 +1,14 @@
 post_max_size = 20M
 upload_max_filesize = 20M
-memory_limit = 128M
+memory_limit = 512M
+
+opcache.enable=1
+opcache.memory_consumption=512
+opcache.interned_strings_buffer=64
+opcache.max_accelerated_files=20000
+opcache.validate_timestamps=0
+opcache.save_comments=1
+opcache.fast_shutdown=1
+opcache.enable_cli=1
+opcache.jit_buffer_size=100M
+opcache.jit=1255

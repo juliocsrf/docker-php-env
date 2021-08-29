@@ -43,7 +43,7 @@ services:
     app:
         container_name: app
         restart: unless-stopped
-        image: juliocsrmf/php-7-4-mongodb-driver
+        image: juliocsrmf/php8-mongodb-driver
         volumes:
             - ./www/app:/usr/www/app
             - ./config/php/app/custom.ini:/usr/local/etc/php/conf.d/custom.ini
