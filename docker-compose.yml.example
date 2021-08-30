@@ -58,6 +58,7 @@ services:
         volumes:
             - ./www/app:/usr/www/app
             - ./config/php/app/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+        working_dir: /usr/www/app
         deploy:
             resources:
                 limits:
