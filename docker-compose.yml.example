@@ -58,6 +58,9 @@ services:
         volumes:
             - ./www/app:/usr/www/app
             - ./config/php/app/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+            - ./config/crontabs/app:/etc/crontabs/root # Use this for enable your custom cronworks
+            - ./config/fpm/app/custom.conf:/usr/local/etc/php-fpm.d/zzz.custom.conf # Custom FPM settings
+            - ./config/ssh/app:/root/.ssh # Save SSH keys outside container
         working_dir: /usr/www/app
         deploy:
             resources:
