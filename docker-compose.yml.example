@@ -1,15 +1,15 @@
 version: "3.2"
 services:
-    db:
-        container_name: mysql
-        image: mysql:8.0.23
-        command: --default-authentication-plugin=mysql_native_password
+    mariadb:
+        container_name: mariadb
+        restart: unless-stopped
+        image: mariadb:10.4
         environment: 
-            MYSQL_ROOT_PASSWORD: root
+            MARIADB_ROOT_PASSWORD: root
         ports:
             - 3306:3306
         volumes:
-            - ./mysql-data:/var/lib/mysql
+            - ./persistent-data/mariadb-data:/var/run/mysqld
         networks:
             - nginx-network
     nginx:
@@ -29,7 +29,7 @@ services:
             resources:
                 limits:
                     memory: 64M
-                    cpus: 0.01
+                    cpus: 0.5
                 reservations:
                     memory: 64M
         networks:

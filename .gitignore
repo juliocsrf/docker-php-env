@@ -1,8 +1,5 @@
 /config/nginx/site.conf
-/mysql-data/
 /www/
 docker-compose.yml
 /config/
-/data
-init-letsencrypt.sh
-/portainer_data
+/persistent-data
