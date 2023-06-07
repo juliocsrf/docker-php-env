@@ -9,7 +9,7 @@ services:
         ports:
             - 3306:3306
         volumes:
-            - ./persistent-data/mariadb-data:/var/run/mysqld
+            - ./persistent-data/mariadb-data:/var/lib/mysql
         networks:
             - nginx-network
     nginx:
